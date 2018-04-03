@@ -17,7 +17,7 @@ git clone https://github.com/jingyangzhang/Notes.git
 //cd
 cd Notes
 3. 
-//???
+//显示URL
 git remote -v
 操作之后显示origin URL (fetch)
             origin URL (push)
@@ -25,19 +25,19 @@ git remote -v
 //配置(服务器/本地??)的profile
 git config --global user.name/email ......
 5. 
-//??
+//创建
 touch readme.txt
 6.
-//??
+//staged
 git add readme.txt
 7.
-//commit, 保存到本地
+//commit
 git commit -m "add readme.txt"
 8.
 //
 git push origin master
 
-git oush -u: 对应
+git push -u: 对应
 
 git init
 
@@ -48,3 +48,5 @@ Checkout and Reset:
 1. git checkout -- <file>  把modified file的内容恢复到修改之前的版本
 2. git reset HEAD <file> 把暂存区的某个文件回退到modified状态
 3. git reset --soft HEAD~1 回退最后一个commit的内容并保留内容的变化. 如果不想保留内容 使用 git reset --hard HEAD~1
+
+---------------------------------algorithm practice------------------------------------------------------
