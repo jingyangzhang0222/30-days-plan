@@ -1,0 +1,44 @@
+Github:
+
+Version control tools: Git, SVN...
+Git: distributed
+SVN: central server
+
+Github 3 states:
+Committed: safely stored in local database
+Modified: changed but not committed to database yet
+Staged: marked a modified file in current version
+Untracted: initial stage
+
+1.
+//将github服务器上的名为Notes的repo拷贝到本地
+git clone https://github.com/jingyangzhang/Notes.git
+2.
+//cd
+cd Notes
+3. 
+//???
+git remote -v
+操作之后显示origin URL (fetch)
+            origin URL (push)
+4. 
+//配置(服务器/本地??)的profile
+git config --global user.name/email ......
+5. 
+//??
+touch readme.txt
+6.
+//??
+git add readme.txt
+7.
+//commit, 保存到本地
+git commit -m "add readme.txt"
+8.
+//
+git push origin master
+
+git oush -u: 对应
+
+git init
+
+git add .
