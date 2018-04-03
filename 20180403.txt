@@ -11,7 +11,7 @@ Staged: marked a modified file in current version
 Untracted: initial stage
 
 1.
-//½«github·şÎñÆ÷ÉÏµÄÃûÎªNotesµÄrepo¿½±´µ½±¾µØ
+//å°†githubæœåŠ¡å™¨ä¸Šçš„åä¸ºNotesçš„repoæ‹·è´åˆ°æœ¬åœ°
 git clone https://github.com/jingyangzhang/Notes.git
 2.
 //cd
@@ -19,10 +19,10 @@ cd Notes
 3. 
 //???
 git remote -v
-²Ù×÷Ö®ºóÏÔÊ¾origin URL (fetch)
+æ“ä½œä¹‹åæ˜¾ç¤ºorigin URL (fetch)
             origin URL (push)
 4. 
-//ÅäÖÃ(·şÎñÆ÷/±¾µØ??)µÄprofile
+//é…ç½®(æœåŠ¡å™¨/æœ¬åœ°??)çš„profile
 git config --global user.name/email ......
 5. 
 //??
@@ -31,14 +31,16 @@ touch readme.txt
 //??
 git add readme.txt
 7.
-//commit, ±£´æµ½±¾µØ
+//commit, ä¿å­˜åˆ°æœ¬åœ°
 git commit -m "add readme.txt"
 8.
 //
 git push origin master
 
-git oush -u: ¶ÔÓ¦
+git oush -u: å¯¹åº”
 
 git init
 
 git add .
+
+github operations
