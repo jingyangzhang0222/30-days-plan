@@ -42,5 +42,3 @@ git oush -u: 对应
 git init
 
 git add .
-
-github operations
