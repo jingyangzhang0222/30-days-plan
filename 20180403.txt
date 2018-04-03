@@ -1,4 +1,4 @@
-Github:
+﻿Github:
 
 Version control tools: Git, SVN...
 Git: distributed
@@ -42,3 +42,9 @@ git oush -u: 对应
 git init
 
 git add .
+
+版本管理:
+Checkout and Reset:
+1. git checkout -- <file>  把modified file的内容恢复到修改之前的版本
+2. git reset HEAD <file>
+3. git reset --soft HEAD~1 回退最后一个commit的内容并保留内容的变化. 如果不想保留内容 使用 git reset --hard HEAD~1
