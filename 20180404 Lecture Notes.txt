@@ -1,0 +1,20 @@
+soft & hard skills
+
+·self introduction:
+brief and personalization based keywords that fowllowing the interview's introductions
+可以顺便套一套目标职位?
+1 min
+
+就算是简历上幽静提及过,也可以再次说一说
+be passionate
+
+·behavior & general question:
+1st priject:
+personalized recommendation engine for restaurants. the backend includes a java serice has 3 servlets,
+teh database is a mysql with 3 tables...
+
+challenge:
+fronted: ajax, rest
+recommendation: precision, 
+
+How could you do when you are lack of  info to solve the problem?

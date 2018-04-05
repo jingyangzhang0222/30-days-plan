@@ -1,0 +1,8 @@
+lecture notes
+DP
+
+review:
+DFS:acyclic directed graph yields no back edges
+proof:
+→: (u,v) is a back edge, v is  an ancestor of u, there is a path form v to u, the n there is a cycle;
+←: suppose there is a cycle, v discovered first, at the time of d(v), all v in the cycle is white, from a white path from v to u, then u become a descendant of v, (u,v) is a back edge.
