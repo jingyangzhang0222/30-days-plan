@@ -1,0 +1,105 @@
+1. Flip Game
+public class Solution {
+  public String[] generatePossibleNextMoves(String s) {
+    if (s == null || s.length() < 2) {
+    	return  new String[0];
+    }
+    List<String> sol = new ArrayList<>();
+    char[] text = s.toCharArray();
+    for (int i = 0; i + 1 < s.length(); i++) {
+    	if (text[i] == text[i + 1] && text[i] == '+') {
+      	text[i] =  '-';
+        text[i + 1] =  '-';
+        sol.add(new String(text));
+        text[i] = '+';
+        text[i + 1] = '+';
+      }
+    }
+    return sol.toArray(new String[0]);///////////////pay attention here!
+  }
+}
+
+Time: O(n)
+Space: O(n)
+
+2. Longest Increasing Path in a Matrix
+public class Solution {
+  public int longestIncreasingPath(int[][] matrix) {
+    if (matrix == null || matrix.length * matrix[0].length == 0) {
+    	return 0;
+    }
+    int[][] longestAscPathFromThisPoint = new int[matrix.length][matrix[0].length];
+    int globalMax = 1;
+    for (int i = 0; i < matrix.length; i++) {
+    	for (int j = 0; j < matrix[0].length; j++) {
+        if (longestAscPathFromThisPoint[i][j] == 0) {
+        	longestAscPathFromThisPoint[i][j] = helper(matrix, i, j, longestAscPathFromThisPoint);
+          globalMax = Math.max(globalMax, longestAscPathFromThisPoint[i][j]);
+        }
+      }
+    }
+    return globalMax;
+  }
+   private int helper(int[][] matrix, int i, int j, int[][] longestAscPathFromThisPoint) {
+  	//base case
+    if (longestAscPathFromThisPoint[i][j] != 0) {//has been solved in the history
+    	return longestAscPathFromThisPoint[i][j];
+    }
+    
+    //how about current level?
+    int left = 0, right = 0, up = 0, down = 0;
+    if (i + 1 < matrix.length && matrix[i + 1][j] > matrix[i][j]) {
+    	right = helper(matrix, i + 1, j, longestAscPathFromThisPoint);
+    }
+    if (i > 0 && matrix[i - 1][j] > matrix[i][j]) {
+    	left = helper(matrix, i - 1, j, longestAscPathFromThisPoint);
+    }
+    if (j + 1 < matrix[0].length && matrix[i][j + 1] > matrix[i][j]) {
+    	down = helper(matrix, i, j + 1, longestAscPathFromThisPoint);
+    }
+    if (j > 0 && matrix[i][j - 1] > matrix[i][j]) {
+    	up = helper(matrix, i, j - 1, longestAscPathFromThisPoint);
+    }
+    longestAscPathFromThisPoint[i][j] = Math.max(Math.max(left, right), Math.max(up, down));
+    return ++longestAscPathFromThisPoint[i][j];
+  }
+}
+a beautiful solution.
+O(n^2), O(n^2)
+
+3. Longest Validparenttheses
+public class Solution {
+  public int longestValidParentheses(String s) {
+    if (s == null || s.length() < 2) {
+    	return 0;
+    }
+    int left1 = 0, left2 = 0;
+    int right1 = 0, right2 = 0;
+    int globalMax1 = 0, globalMax2 = 0;
+    for (int i = 0; i < s.length(); i++) {
+    	if (s.charAt(i) == '(') {
+      	left1++;
+      }else {
+      	right1++;
+      }
+      if (s.charAt(s.length() - 1 - i) == '(') {
+      	left2++;
+      }else {
+      	right2++;
+      }
+      if(left1 == right1) globalMax1 = Math.max(globalMax1, 2 * right1);
+      if(left2 == right2) globalMax2 = Math.max(globalMax2, 2 * left2);
+      if (right1 > left1) {
+      	left1 = 0;
+        right1 = 0;
+      }
+      if (right2 < left2) {
+      	right2 = 0;
+        left2 = 0;
+      }
+    }
+    return Math.max(globalMax1, globalMax2);
+  }
+}
+
+O(n), O(1)
