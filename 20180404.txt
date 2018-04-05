@@ -168,3 +168,28 @@ class Solution {
         }
     }    
 }
+
+6.Subarray Sum To Target
+public class Solution {
+  public boolean sumToTarget(int[] array, int target) {
+    if (array == null || array.length == 0) {
+    	return false;	
+    }
+    
+    Set<Integer> prefix = new HashSet<>();
+    int pre = 0;
+    int cur = 0;
+    for (int i = 0; i < array.length; i++) {
+    	if (array[i] == target) return true;
+      cur = pre + array[i];
+      if (cur == target || prefix.contains(cur - target)) {
+      	return true;
+      }
+      prefix.add(cur);
+      pre = cur;
+    }
+    return false;
+  }
+}
+O(n), O(n)
+
