@@ -1,0 +1,23 @@
+1.Number of negative number in sorted matrix
+public class Solution {
+  public int negNumber(int[][] matrix) {
+    //corner case
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+    	return 0;
+    }
+    int x = matrix.length - 1;
+    int y = 0;
+    int count = 0;
+    while (x >= 0 && y < matrix[0].length) {
+    	if (matrix[x][y] < 0) {
+      	count += x + 1;
+        y++;
+      } else {
+      	x--;
+      }
+    }
+    return count;
+  }
+}
+//length == n & m, O(n + m), O(1)
+//but I think there is a way to do it  in O(log)
