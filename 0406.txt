@@ -21,3 +21,22 @@ public class Solution {
 }
 //length == n & m, O(n + m), O(1)
 //but I think there is a way to do it  in O(log)
+
+2. Number of Words
+public class Solution {
+  public int numOfWords(String input) {
+    //corner case
+    if (input.length() == 0) return 0;
+    int count= 0;
+    for (int i = 0; i < input.length(); i++) {
+    	if (input.charAt(i) != ' ' && input.charAt(i) != '\t' && input.charAt(i) != '\n') {
+      	count++;
+        while (i + 1 < input.length() && input.charAt(i + 1) != ' '&& input.charAt(i) != '\t' && input.charAt(i) != '\n') {
+        	i++;
+        }
+      }
+    }    
+    return count;
+  }
+}
+O(n) O(1)

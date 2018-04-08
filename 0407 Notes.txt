@@ -1,0 +1,19 @@
+Lecture 30
+GCE(Google Cloud Engine)
+
+Features: 
+1. Durable:
+	多份, and main tanin geographically distinct, with checksum to ensure data integrety.
+2. Avability:
+	around the world avability
+3. scalable
+4.cheap
+
+
+Feature condideration and choose: 首先要考虑是否符合自己的需求, 然后再是各种价格考虑等
+
+Content Dilevery Network:
+	traditional: central(logically), when far awway form the server, it becomes slow
+	CDN: 设置各种地理位置的数据中心, 由公司内部来保证数据的一致性, 同时提高performance
+	     (访问最近的数据中心)
+	     公司: Akamai, Cloudflare
