@@ -1,103 +1,84 @@
-1. Sorted Array To Binary Search Tree
+1. All Factors Of A Number
 public class Solution {
-  public TreeNode sortedArrayToBST(int[] num) {
-    //corner case
-    if (num == null || num.length == 0) {
-    	return null;
-    }
-    return helper(num, 0, num.length - 1);
+  public List<List<Integer>> factors(int n) {
+  	List<List<Integer>> sol = new ArrayList<>();
+    helper(sol, new ArrayList<Integer>(), 2, n);
+    return sol;
   }
-  private TreeNode helper(int[] num, int left, int right) {
-    //base case
-    if (left > right) {
-    	return null;
-    }
-  	int mid = left + (right - left) / 2;
-    TreeNode curRoot = new TreeNode(num[mid]);
-    curRoot.left = helper(num, left, mid - 1);
-    curRoot.right = helper(num, mid + 1, right); 
-    return curRoot;
-  }
-}
-//Time: O(n), Space: O(logn)(call stack)
+  private void helper(List<List<Integer>> sol, List<Integer> subsol, int start, int quo) {
+  	//termination condition
+		if (quo == 1) {
+			sol.add(new ArrayList<Integer>(subsol));
+			return;
+		}
 
-2. Shortest Distance from All Points
+		boolean needToBreak = false;
+		for (int i = start; i <= quo; i++) {
+			int curFactor = 0;
+			if (i * i <= quo) {
+				curFactor = i;
+			} else {
+				curFactor = quo;
+				needToBreak = true;
+			}
+			if (quo % curFactor == 0) {
+				subsol.add(curFactor);
+				helper(sol, subsol, curFactor, quo / curFactor);
+				subsol.remove(subsol.size() - 1);
+			}
+			if(needToBreak) break;
+		}
+	}
+}
+
+2. depth of a forest
 public class Solution {
-  public int shortestDistance(int[][] grid) {
-  	if (grid == null || grid.length == 0 || grid[0].length == 0) {
-    	return -1;
-   	}
-    
-    int[][] count = new int[grid.length][grid[0].length];
-    boolean[][] visited = new boolean[grid.length][grid[0].length];
-    int[][] dis = new int[grid.length][grid[0].length];
-    int houseCount = 0;
-    
-  	for (int i = 0; i < grid.length; i++) {
-    	for (int j = 0; j < grid[0].length; j++) {
-      	if (grid[i][j] == 1) {
-          houseCount++;
-        	helper(grid, i, j, dis, count);
+  public int depth(int[] forest) {
+    int globalMax = 1;
+    boolean containsLoop = false;
+    for (int i = 0; i < forest.length; i++) {
+    	int count = 1;
+      int index = i;      
+      while (forest[index] != -1) {
+        if (index == i && count != 1) {
+        	containsLoop = true;
+          break;
         }
+      	count++;
+        index = forest[index];
       }
+      if (containsLoop) break;
+      globalMax = Math.max(globalMax, count);
     }
-    if (houseCount == 0) return -1;
-    
-    int globalMin = Integer.MAX_VALUE;
-    for (int i = 0; i < grid.length; i++) {
-    	for (int j = 0; j < grid[0].length; j++) {
-      	if (count[i][j] == houseCount) {
-        	globalMin = Math.min(globalMin, dis[i][j]);
-        }
-      }
-    }
-    return globalMin == Integer.MAX_VALUE ? -1 : globalMin;
-  }
-  private void helper(int[][] grid, int i, int j, int[][] dis, int[][] count) {
-    Queue<Cell> q =new LinkedList<>();
-    boolean[][] visited = new boolean[grid.length][grid[0].length];
-    q.offer(new Cell(i, j, grid[i][j])); 
-    int distance = 0;
-    visited[i][j] = true;    
-    while (!q.isEmpty()) {
-      int size = q.size();
-      for (int k = 0; k < size; k++) {
-      	Cell curCell = q.poll();
-      	int x = curCell .x;
-      	int y = curCell.y;      
-      	if (curCell.value == 0) {
-      		dis[x][y] += distance;
-        	count[x][y]++;
-      	}
-      	if (x + 1 < grid.length && !visited[x + 1][y] && grid[x + 1][y] != 1 && grid[x + 1][y] != 2) {
-      		q.offer(new Cell(x + 1, y, grid[x + 1][y]));
-        	visited[x + 1][y] = true;
-      	}
-      	if (y + 1 < grid[0].length && !visited[x][y + 1] && grid[x][y + 1] != 1 && grid[x][y + 1] != 2) {
-      		q.offer(new Cell(x, y + 1, grid[x][y + 1]));
-        	visited[x][y + 1] = true;
-      	}
-      	if (x > 0 && !visited[x - 1][y] && grid[x - 1][y] != 1 && grid[x - 1][y] != 2) {
-      		q.offer(new Cell(x - 1, y, grid[x - 1][y]));
-        	visited[x - 1][y] = true;
-      	}
-      	if (y > 0 && !visited[x][y - 1] && grid[x][y - 1] != 1 && grid[x][y - 1] != 2) {
-      		q.offer(new Cell(x, y - 1, grid[x][y - 1]));
-        	visited[x][y - 1] = true;
-      	}
-      }    	
-      distance++;
-    }
-  }
-  class Cell{
-  	int x;
-    int y;
-    int value;
-    public Cell(int x, int y, int value) {
-    	this.x = x;
-      this.y = y;
-      this.value = value;
-    }
+    return containsLoop ? -1 : globalMax;
   }
 }
-O(k * mn), O(mn)
+
+O(n^2), O(1)
+
+3. keep distance for identical elements
+public class Solution {
+  public int[] keepDistance(int k) {
+		int[] subsol = new int[2 * k];
+    int[][] sol = new int[1][2 * k];
+		helper(sol, subsol, 1);
+		return sol[0][0] == 0 ? null : sol[0];    
+  }
+	private void helper(int[][] sol, int[] subsol, int index) {
+		//base case
+		if (index == subsol.length / 2 + 1) {
+			sol[0] = Arrays.copyOf(subsol, subsol.length);
+			return;
+		}
+		for (int i = 0; i + index + 1 < subsol.length; i++) {
+			if (subsol[i] != 0 || subsol[i + index + 1] != 0) {
+				continue;
+			}
+			subsol[i] = index;
+			subsol[i + index + 1] = index;
+			helper(sol, subsol, index + 1);
+			subsol[i] = 0;
+			subsol[i + index + 1] = 0;
+		}
+	}
+}
