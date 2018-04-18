@@ -1,0 +1,32 @@
+1.Letter Combinations of a Phone Number(L17)
+/*
+ *2: abc, 3: def
+ *4: ghi, 5: jkl, 6: mno
+ *7:pqrs, 8: tuv, 9:wxyz
+*/
+class Solution {
+    static final char[][] fac = {{},{},{'a','b','c'},{'d','e','f'},{'g','h','i'},{'j','k','l'},{'m','n','o'},{'p','q','r','s'},{'t','u','v'},{'w','x','y','z'}};
+    public List<String> letterCombinations(String digits) {
+        List<String> sol = new ArrayList<>();
+        //corner case
+        if (digits == null || digits.length() == 0) {
+            return sol;            
+        }
+        StringBuilder sb = new StringBuilder();
+        helper(digits, 0, sb, sol);
+        return sol;
+    }
+    private void helper(String digits, int index, StringBuilder sb, List<String> sol) {
+        //base case
+        if (index == digits.length()) {
+            sol.add(sb.toString());
+            return;
+        }
+        
+        for (int i = 0; i < fac[digits.charAt(index) - '0'].length; i++) {
+            sb.append(fac[digits.charAt(index) - '0'][i]);
+            helper(digits, index + 1, sb, sol);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
