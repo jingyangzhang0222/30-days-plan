@@ -30,3 +30,62 @@ class Solution {
         }
     }
 }
+//O(4^n), O(n)
+
+2. Roman to Integer
+/*I             1
+  V             5
+ *X             10
+  L             50
+ *C             100
+  D             500
+  M             1000
+  
+  I can be placed before V (5) and X (10) to make 4 and 9. 
+  X can be placed before L (50) and C (100) to make 40 and 90. 
+  C can be placed before D (500) and M (1000) to make 400 and 900.
+  MCMXCIV -> M CM XC IV = 1000 + 1000 + 100 + 5 - 100 - 10 - 1 = 2105 - 101 = 1994
+ *
+*/
+class Solution {
+    public int romanToInt(String s) {
+        //corner case
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int res = 0;
+        int minusHundred = 0;
+        int minusTen = 0;
+        int minusOne = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'M') {
+                res += 1000;
+            } else if (s.charAt(i) == 'D') {
+                res += 500;
+            } else if (s.charAt(i) == 'L') {
+                res += 50;
+            } else if (s.charAt(i) == 'V') {
+                res += 5;
+            } else if (s.charAt(i) == 'C') {
+                if (i + 1 < s.length() && (s.charAt(i + 1) == 'D' || s.charAt(i + 1) == 'M')) {
+                    minusHundred++;
+                } else {
+                    res += 100;
+                }
+            } else if (s.charAt(i) == 'X') {
+                if (i + 1 < s.length() && (s.charAt(i + 1) == 'L' || s.charAt(i + 1) == 'C')) {
+                    minusTen++;
+                } else {
+                    res += 10;
+                }
+            } else if (s.charAt(i) == 'I') {
+                if (i + 1 < s.length() && (s.charAt(i + 1) == 'X' || s.charAt(i + 1) == 'V')) {
+                    minusOne++;
+                } else {
+                    res++;
+                }
+            }
+        }
+        return res - 100 * minusHundred - 10 * minusTen - minusOne;
+    }
+}
